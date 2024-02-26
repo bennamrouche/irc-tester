@@ -13,8 +13,13 @@ public class GlobalConfig
      public static int port = 8080;
      public static String HOST =  "localhost";
      public static String SERVER_PASS = "root" ;
-       public static int  clean  = 0;
+     public static int  command  = 0;
+    
   
+      public static final int   Start  =  1;
+      public static final int   Stop   =  2;
+      public static final int   SendToAll = 3;
+   
      
       public static  String[] names = {
             "James", "Mary", "Robert", "Patricia", "John", "Jennifer", "Michael", "Linda", "David", "Elizabeth",

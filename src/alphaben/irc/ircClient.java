@@ -33,12 +33,10 @@ public ircClient(String ServerAddress ,int port,String name)
             sock.getOutputStream().flush();
           
             status = STATUS_CONNECTED;
-           
-        
+ 
         }catch(Exception ex)
         {
             sock = new Socket();
-            System.out.println(ex.getMessage() + sock);
             data += GlobalConfig.ERR_CON_SERVER;
             status = STATUS_ERROR;
         }

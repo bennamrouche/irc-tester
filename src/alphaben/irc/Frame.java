@@ -2,14 +2,13 @@
 package alphaben.irc;
 
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 
 public class Frame extends javax.swing.JFrame { 
     boolean isRunning = false;
+   static  Frame instance  = null;
+    
     public Frame() 
     {
         initComponents();
@@ -17,6 +16,16 @@ public class Frame extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(0x03001C));
     }
 
+    public static Frame Instance()
+    {
+        if (instance == null){
+                
+            instance = new Frame();
+            instance.setTitle("[+] IrcMultiClient #  Alphaben [+]");
+        }
+                
+        return instance; 
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -155,7 +164,7 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("<html> Enter IP,  Password and  Port to Connect , IrcMultiClient Connect you to  100 client automaticly  <br>              and each one of them is joined to a channel  \"room\"  </html> ");
+        jLabel3.setText("<html> Enter <b> IP </b> ,  <b> Password</b> and  <b> Port </b>  to Connect , IrcMultiClient Connect you to <b>200 </b> client automaticly  <br>              and each one of them is joined to a channel  \"room\"  </html> ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,19 +199,18 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAddressActionPerformed
 
     
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-   
-        btnStart.setEnabled(false);
-        
-        if  (isRunning == false)
+    
+    
+   public void runCommand()
+   {
+        if  (GlobalConfig.command == GlobalConfig.Start)
         {  
             
-          btnStart.setText("Stop");
+           btnStart.setText("Stop");
            String StringAddress = txtAddress.getText();
            String  StringPort = txtPort.getText();
            String  StringPassword = txtPassword.getText();
-        
-        int port;
+            int port;
         if(StringAddress.length() == 0 || StringPort.length() == 0 || StringPassword.length() == 0)
         {
                 JOptionPane.showMessageDialog(null, GlobalConfig.EMPTY_FIELDS);
@@ -213,53 +221,56 @@ public class Frame extends javax.swing.JFrame {
         port = Integer.parseInt(StringPort);
         GlobalConfig.SERVER_PASS = StringPassword;
         clinetContainer.removeAll();
-        clinetContainer.setLayout(new GridLayout(0, 5));
         clinetContainer.setLayout(new BoxLayout(clinetContainer, BoxLayout.Y_AXIS));
-        
-        
-        for(int i = 0; i<  2500; i++)
+
+        for(int i = 0; i<  200; i++)
         {
-            this.clinetContainer.add(new ClientPanel(new ircClient(StringAddress,port, GlobalConfig.names[i % GlobalConfig.names.length]+i)));
+            this.clinetContainer.add(new ClientPanel(new ircClient(StringAddress,port, GlobalConfig.names[i])));
              this.validate();
         }
-        
-         GlobalConfig.Mintor = new Thread(new ClinetMintor());
-         GlobalConfig.Mintor.start();
+        GlobalConfig.command = 0;
      }// end if check is runnig 
-        else 
+        else if (GlobalConfig.command == GlobalConfig.Stop)
         {   
             for (ClientPanel pn : ClientPanel.clinets)
             {
                 try {
-                    pn.client.sock.close();
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-                }
-                 ClientPanel.clinets.clear(); 
-                clinetContainer.remove(pn);
-                clinetContainer.validate();
+                       clinetContainer.remove(pn);
+                       pn.client.sock.close();
+                } catch (Exception ex) { }
+                
+                 clinetContainer.validate();
             }
-            
+             ClientPanel.clinets.clear();           
              btnStart.setText("Start");
              clinetContainer.add(lblNoClient);
+               GlobalConfig.command = 0;
         }
+        else
+            return;
         
-          isRunning = !isRunning;
+           isRunning = !isRunning;
+          
           btnStart.setEnabled(true);
+   
+   }
+    
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+           btnStart.setEnabled(false);
+           if (isRunning)
+                    GlobalConfig.command = GlobalConfig.Stop;
+           else 
+                  GlobalConfig.command = GlobalConfig.Start;
+        
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtPasswordActionPerformed
 
    
     public static void main(String args[]) {
-        
-        
-        
-        
-//        System.out.println(GlobalConfig.names.length);
+       System.err.close();
 //        System.exit(0);
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -280,9 +291,10 @@ public class Frame extends javax.swing.JFrame {
  
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-         Frame fr=        new Frame();
+             Frame fr=         Frame.Instance();
             fr.setVisible(true);
             fr.setLocationRelativeTo(null);
+              GlobalConfig.Mintor.start();
                 
             }
         });
