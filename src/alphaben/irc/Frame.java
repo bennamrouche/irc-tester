@@ -217,9 +217,9 @@ public class Frame extends javax.swing.JFrame {
         clinetContainer.setLayout(new BoxLayout(clinetContainer, BoxLayout.Y_AXIS));
         
         
-        for(int i = 0; i<  100; i++)
+        for(int i = 0; i<  2500; i++)
         {
-            this.clinetContainer.add(new ClientPanel(new ircClient(StringAddress,port, GlobalConfig.names[i])));
+            this.clinetContainer.add(new ClientPanel(new ircClient(StringAddress,port, GlobalConfig.names[i % GlobalConfig.names.length]+i)));
              this.validate();
         }
         
@@ -236,7 +236,7 @@ public class Frame extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex.getMessage());
                 }
-                
+                 ClientPanel.clinets.clear(); 
                 clinetContainer.remove(pn);
                 clinetContainer.validate();
             }

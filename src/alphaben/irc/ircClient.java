@@ -24,11 +24,11 @@ public ircClient(String ServerAddress ,int port,String name)
             sock = new Socket(ServerAddress, port);  
             
             String aut = 
-                            "PASS " + GlobalConfig.SERVER_PASS  +"\n"
-                            + "NICK " + name + "\n" +
-                            "USER " + name  + "\n"
-                           + "JOIN #room\n";
-            insertData("autentaction " + aut+ "\n");
+                            "PASS " + GlobalConfig.SERVER_PASS  +"\r\n"
+                            + "NICK " + name + "\r\n" +
+                            "USER " + name  + " 0 * " + name + "rm \r\n"
+                           + "JOIN #room\r\n";
+            insertData("autentaction \n " + aut+ "\n");
             sock.getOutputStream().write(aut.getBytes());
             sock.getOutputStream().flush();
           
@@ -57,7 +57,7 @@ public void Disconnected()
     }
     catch(Exception ex)
     {
-          ex.printStackTrace();
+         System.out.println( ex.getMessage());
     }
    
 }

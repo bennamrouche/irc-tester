@@ -14,9 +14,7 @@ public class ClinetMintor implements Runnable
                   for(ClientPanel clt : ClientPanel.clinets)
             {
                     clt.updateView();
-            }           
-//                  if()
-                  
+            }                 
                  ClientManger.getInctance().updateData();
              }catch(Exception ex)
              {

@@ -1,9 +1,5 @@
 package alphaben.irc;
 
-
-
-
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
