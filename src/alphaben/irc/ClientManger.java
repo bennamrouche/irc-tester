@@ -16,12 +16,7 @@ public class ClientManger extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.black);
       
  }
- /*
-JOIN #
-PRIVMSG #
-PART #
-QUIT
-*/
+
  public static ClientManger getInctance()
  {
      if (instance == null)
@@ -317,18 +312,21 @@ QUIT
     private void btnSendAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAllActionPerformed
    
         String msg = lblMessage.getText();
-     btnSendAll.setEnabled(false);
-      btnSendAll.setText("Wait ..."); //all Send this
+  
        if(msg.length() == 0)
            return ;
+           System.out.println("-- waiting ");
+      btnSendAll.setEnabled(false);
+      btnSendAll.setText("Wait ..."); //all Send this
+
        for(ClientPanel clt : ClientPanel.clinets)
        {
-            clt.client.SendToServer(msg);
-          
-       }
-       
+            clt.client.SendToServer(msg + "\n"); 
+            //   System.out.println("-- finished --  " + msg); 
+       } 
      btnSendAll.setEnabled(true);
      btnSendAll.setText("all Send this");
+    System.out.println("-- finished  ");
     }//GEN-LAST:event_btnSendAllActionPerformed
 
     private void lblMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMessageActionPerformed
