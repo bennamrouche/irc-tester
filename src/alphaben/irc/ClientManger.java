@@ -300,7 +300,7 @@ public class ClientManger extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-       client.SendToServer(lblMessage.getText() + "\n");
+       client.SendToServer(lblMessage.getText() + "\r\n");
         update();
     }//GEN-LAST:event_btnSendActionPerformed
 
