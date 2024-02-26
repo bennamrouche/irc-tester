@@ -10,8 +10,6 @@ build: $(SRC)
 run: build 
 	java -cp build/classes  alphaben.irc.Frame
 
-jar: build 
-
 clean:
 	rm -rf  build/classes/alphaben/irc/* 
 re  :clean  build 
