@@ -28,7 +28,7 @@ public ircClient(String ServerAddress ,int port,String name)
                             + "NICK " + name + "\r\n" +
                             "USER " + name  + " 0 * " + name + "rm \r\n"
                            + "JOIN #room\r\n";
-            insertData("autentaction \n " + aut+ "\n");
+            insertData("authentication : \n " + aut+ "\n");
             sock.getOutputStream().write(aut.getBytes());
             sock.getOutputStream().flush();
           
