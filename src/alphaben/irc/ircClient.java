@@ -1,5 +1,6 @@
 package alphaben.irc;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,45 @@ public class ircClient
     String  data = "";
     String   name = "";
     
+    
+    
+ void StartAuthentaction()
+    {
+        try {
+         
+                   String pass =  "PASS " + GlobalConfig.SERVER_PASS  +"\r\n";
+                   String nick =   "NICK " + name + "\r\n";
+                   String user =    "USER " + name  + " 0 * " + name + "rm \r\n";
+                   String join =    "JOIN #room\r\n";
+                  insertData("authentication : \n " + pass + nick + user + join + "\n");
+            
+            sock.getOutputStream().write(pass.getBytes());
+            sock.getOutputStream().flush();
+            Thread.sleep(2);
+           sock.getOutputStream().write(nick.getBytes());
+           sock.getOutputStream().flush();
+           
+              Thread.sleep(2);
+            sock.getOutputStream().write(user.getBytes());
+            sock.getOutputStream().flush();
+              
+            Thread.sleep(2);
+
+            sock.getOutputStream().write(join.getBytes());
+            sock.getOutputStream().flush();
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ircClient.class.getName()).log(Level.SEVERE,  ex.getMessage());
+        }
+    
+    
+    }
+ 
+// /**
+//  * 
+//  * @see this is a Constructor  
+//  */
 public ircClient(String ServerAddress ,int port,String name)
 {
     try
@@ -22,16 +62,7 @@ public ircClient(String ServerAddress ,int port,String name)
             
              this.name = name ;
             sock = new Socket(ServerAddress, port);  
-            
-            String aut = 
-                            "PASS " + GlobalConfig.SERVER_PASS  +"\r\n"
-                            + "NICK " + name + "\r\n" +
-                            "USER " + name  + " 0 * " + name + "rm \r\n"
-                           + "JOIN #room\r\n";
-            insertData("authentication : \n " + aut+ "\n");
-            sock.getOutputStream().write(aut.getBytes());
-            sock.getOutputStream().flush();
-          
+           StartAuthentaction();
             status = STATUS_CONNECTED;
  
         }catch(Exception ex)

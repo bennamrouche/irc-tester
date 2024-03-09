@@ -218,7 +218,7 @@ public class ClientManger extends javax.swing.JFrame {
         jSeparator7.setPreferredSize(new java.awt.Dimension(30, 10));
         SendPanel.add(jSeparator7);
 
-        btnSend.setBackground(new java.awt.Color(255, 211, 105));
+        btnSend.setBackground(new java.awt.Color(204, 255, 255));
         btnSend.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         btnSend.setText("Send ");
         btnSend.setMaximumSize(new java.awt.Dimension(72, 28));
