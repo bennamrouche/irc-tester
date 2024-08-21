@@ -321,7 +321,7 @@ public class ClientManger extends javax.swing.JFrame {
 
        for(ClientPanel clt : ClientPanel.clinets)
        {
-            clt.client.SendToServer(msg + "\n"); 
+            clt.client.SendToServer(msg + "\r\n"); 
             //   System.out.println("-- finished --  " + msg); 
        } 
      btnSendAll.setEnabled(true);
