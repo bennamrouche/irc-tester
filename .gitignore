@@ -1,1 +1,4 @@
-*.class 
+.vscode
+*.pyc
+*.class
+.DS_Store
