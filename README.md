@@ -38,7 +38,7 @@ make run
 
 # How to use  
 ## Step 1
-Enter IP, Port, Password  
+Enter IP, Port, Password , Client count
 Click the Start button  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step1.png)
 
@@ -48,8 +48,7 @@ In this Example:
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step2.png)
 
 ## Step 3
-Click PRIVMSG Button.  
-Write the User Name, in this Example Mary, and Click The Send Button.  
+write any command in textArea.   
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step3.png)
 
 ## Step 4
