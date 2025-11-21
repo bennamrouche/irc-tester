@@ -1,3 +1,7 @@
+> ⚡ **Note:** Version 2.0 is coming soon! Switch to the [`v2` branch](https://github.com/bennamrouche/ircMultiClient/tree/v2) to try the latest features.
+
+
+
 ![Netbeans](https://github.com/bennamrouche/ircMultiClient/assets/107180422/dfafeef3-c817-4a35-825c-e6f47ce429a7)  <b>  code build using  Netbeans IDE  </b>
 
 <h3 align="left">Connect with me:</h3>
