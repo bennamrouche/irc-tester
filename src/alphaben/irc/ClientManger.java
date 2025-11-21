@@ -2,11 +2,13 @@
 package alphaben.irc;
 
 import java.awt.Color;
-
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.SwingWorker;
 
 public class ClientManger extends javax.swing.JFrame {
   
-    private ircClient client;
+    private IrcClient client;
     private static  ClientManger instance = null;
     
  public ClientManger() 
@@ -14,6 +16,7 @@ public class ClientManger extends javax.swing.JFrame {
         this.client = null;
         initComponents();
         this.getContentPane().setBackground(Color.black);
+        progressBar.setVisible(false);
       
  }
 
@@ -37,44 +40,35 @@ public class ClientManger extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         lblStatus = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        lblStatus1 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        btnJoin = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        btnPrivmsg = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
-        btnPart = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
-        btnQuit = new javax.swing.JButton();
-        SendPanel = new javax.swing.JPanel();
-        lblMessage = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
+        progressBar = new javax.swing.JProgressBar();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lblMessage = new javax.swing.JTextPane();
+        jLabel2 = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
-        jSeparator9 = new javax.swing.JSeparator();
         btnSendAll = new javax.swing.JButton();
-        jSeparator8 = new javax.swing.JSeparator();
         btnDisconnected = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
-        txtClientData.setEditable(false);
-        txtClientData.setBackground(new java.awt.Color(0, 0, 0));
+        txtClientData.setBackground(new java.awt.Color(45, 49, 66));
         txtClientData.setColumns(20);
-        txtClientData.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         txtClientData.setForeground(new java.awt.Color(255, 255, 255));
         txtClientData.setRows(5);
         jScrollPane1.setViewportView(txtClientData);
 
-        commanmPanel.setBackground(new java.awt.Color(0, 0, 0));
+        commanmPanel.setBackground(new java.awt.Color(79, 93, 117));
         commanmPanel.setMaximumSize(new java.awt.Dimension(100, 20));
         commanmPanel.setLayout(new javax.swing.BoxLayout(commanmPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         lblName.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        lblName.setForeground(new java.awt.Color(255, 211, 105));
+        lblName.setForeground(new java.awt.Color(255, 217, 61));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Mord Razi");
+        lblName.setText("alphaben");
         commanmPanel.add(lblName);
 
         jSeparator2.setBackground(new Color(0,0,0,0)
@@ -87,28 +81,12 @@ public class ClientManger extends javax.swing.JFrame {
 
         lblStatus.setBackground(new java.awt.Color(204, 255, 102));
         lblStatus.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        lblStatus.setForeground(new java.awt.Color(51, 255, 0));
+        lblStatus.setForeground(new java.awt.Color(78, 205, 196));
         lblStatus.setText("Connected");
         lblStatus.setMaximumSize(new java.awt.Dimension(69, 28));
         lblStatus.setMinimumSize(new java.awt.Dimension(69, 28));
         lblStatus.setPreferredSize(new java.awt.Dimension(69, 28));
         commanmPanel.add(lblStatus);
-
-        jSeparator4.setBackground(new Color(0,0,0,0)
-        );
-        jSeparator4.setForeground(new Color(0,0,0,0));
-        jSeparator4.setMaximumSize(new java.awt.Dimension(20, 10));
-        jSeparator4.setMinimumSize(new java.awt.Dimension(20, 10));
-        jSeparator4.setPreferredSize(new java.awt.Dimension(20, 10));
-        commanmPanel.add(jSeparator4);
-
-        lblStatus1.setBackground(new java.awt.Color(204, 255, 102));
-        lblStatus1.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        lblStatus1.setForeground(new java.awt.Color(255, 211, 105));
-        lblStatus1.setText("Commands : ");
-        lblStatus1.setMaximumSize(new java.awt.Dimension(83, 28));
-        lblStatus1.setMinimumSize(new java.awt.Dimension(83, 28));
-        commanmPanel.add(lblStatus1);
 
         jSeparator6.setBackground(new Color(0,0,0,0)
         );
@@ -118,61 +96,6 @@ public class ClientManger extends javax.swing.JFrame {
         jSeparator6.setPreferredSize(new java.awt.Dimension(20, 10));
         commanmPanel.add(jSeparator6);
 
-        btnJoin.setBackground(new java.awt.Color(255, 211, 105));
-        btnJoin.setFont(new java.awt.Font("Cantarell", 1, 12)); // NOI18N
-        btnJoin.setText("JOIN");
-        btnJoin.setMaximumSize(new java.awt.Dimension(72, 28));
-        btnJoin.setMinimumSize(new java.awt.Dimension(72, 28));
-        btnJoin.setPreferredSize(new java.awt.Dimension(7, 28));
-        btnJoin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJoinActionPerformed(evt);
-            }
-        });
-        commanmPanel.add(btnJoin);
-
-        jSeparator1.setBackground(new Color(0,0,0,0)
-        );
-        jSeparator1.setForeground(new Color(0,0,0,0));
-        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 10));
-        jSeparator1.setMinimumSize(new java.awt.Dimension(20, 10));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(20, 10));
-        commanmPanel.add(jSeparator1);
-
-        btnPrivmsg.setBackground(new java.awt.Color(255, 211, 105));
-        btnPrivmsg.setFont(new java.awt.Font("Cantarell", 1, 12)); // NOI18N
-        btnPrivmsg.setText("PRIVMSG");
-        btnPrivmsg.setMaximumSize(new java.awt.Dimension(90, 28));
-        btnPrivmsg.setMinimumSize(new java.awt.Dimension(90, 28));
-        btnPrivmsg.setPreferredSize(new java.awt.Dimension(90, 28));
-        btnPrivmsg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrivmsgActionPerformed(evt);
-            }
-        });
-        commanmPanel.add(btnPrivmsg);
-
-        jSeparator3.setBackground(new Color(0,0,0,0)
-        );
-        jSeparator3.setForeground(new Color(0,0,0,0));
-        jSeparator3.setMaximumSize(new java.awt.Dimension(20, 10));
-        jSeparator3.setMinimumSize(new java.awt.Dimension(20, 10));
-        jSeparator3.setPreferredSize(new java.awt.Dimension(20, 10));
-        commanmPanel.add(jSeparator3);
-
-        btnPart.setBackground(new java.awt.Color(255, 211, 105));
-        btnPart.setFont(new java.awt.Font("Cantarell", 1, 12)); // NOI18N
-        btnPart.setText("PART");
-        btnPart.setMaximumSize(new java.awt.Dimension(72, 28));
-        btnPart.setMinimumSize(new java.awt.Dimension(72, 28));
-        btnPart.setPreferredSize(new java.awt.Dimension(72, 28));
-        btnPart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPartActionPerformed(evt);
-            }
-        });
-        commanmPanel.add(btnPart);
-
         jSeparator5.setBackground(new Color(0,0,0,0)
         );
         jSeparator5.setForeground(new Color(0,0,0,0));
@@ -181,63 +104,40 @@ public class ClientManger extends javax.swing.JFrame {
         jSeparator5.setPreferredSize(new java.awt.Dimension(20, 10));
         commanmPanel.add(jSeparator5);
 
-        btnQuit.setBackground(new java.awt.Color(255, 211, 105));
-        btnQuit.setFont(new java.awt.Font("Cantarell", 1, 12)); // NOI18N
-        btnQuit.setText("QUIT");
-        btnQuit.setMaximumSize(new java.awt.Dimension(72, 28));
-        btnQuit.setMinimumSize(new java.awt.Dimension(72, 28));
-        btnQuit.setPreferredSize(new java.awt.Dimension(72, 28));
-        btnQuit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitActionPerformed(evt);
-            }
-        });
-        commanmPanel.add(btnQuit);
-
-        SendPanel.setBackground(new java.awt.Color(0, 0, 0));
-        SendPanel.setLayout(new javax.swing.BoxLayout(SendPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        lblMessage.setBackground(new java.awt.Color(57, 62, 70));
-        lblMessage.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        lblMessage.setForeground(new java.awt.Color(255, 211, 105));
-        lblMessage.setMaximumSize(new java.awt.Dimension(300, 28));
-        lblMessage.setMinimumSize(new java.awt.Dimension(200, 28));
-        lblMessage.setPreferredSize(new java.awt.Dimension(200, 28));
-        lblMessage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblMessageActionPerformed(evt);
-            }
-        });
-        SendPanel.add(lblMessage);
-
-        jSeparator7.setBackground(new Color(0,0,0,0)
+        jSeparator10.setBackground(new Color(0,0,0,0)
         );
-        jSeparator7.setForeground(new Color(0,0,0,0));
-        jSeparator7.setMaximumSize(new java.awt.Dimension(33, 32767));
-        jSeparator7.setMinimumSize(new java.awt.Dimension(30, 10));
-        jSeparator7.setPreferredSize(new java.awt.Dimension(30, 10));
-        SendPanel.add(jSeparator7);
+        jSeparator10.setForeground(new Color(0,0,0,0));
+        jSeparator10.setMaximumSize(new java.awt.Dimension(20, 10));
+        jSeparator10.setMinimumSize(new java.awt.Dimension(20, 10));
+        jSeparator10.setPreferredSize(new java.awt.Dimension(20, 10));
+        commanmPanel.add(jSeparator10);
 
-        btnSend.setBackground(new java.awt.Color(204, 255, 255));
+        jSeparator11.setBackground(new Color(0,0,0,0)
+        );
+        jSeparator11.setForeground(new Color(0,0,0,0));
+        jSeparator11.setMaximumSize(new java.awt.Dimension(20, 10));
+        jSeparator11.setMinimumSize(new java.awt.Dimension(20, 10));
+        jSeparator11.setPreferredSize(new java.awt.Dimension(20, 10));
+        commanmPanel.add(jSeparator11);
+
+        progressBar.setValue(50);
+        commanmPanel.add(progressBar);
+
+        lblMessage.setBackground(new java.awt.Color(0, 0, 0));
+        lblMessage.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        jScrollPane2.setViewportView(lblMessage);
+
+        btnSend.setBackground(new java.awt.Color(78, 205, 196));
         btnSend.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        btnSend.setText("Send ");
+        btnSend.setText("Send");
         btnSend.setMaximumSize(new java.awt.Dimension(72, 28));
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendActionPerformed(evt);
             }
         });
-        SendPanel.add(btnSend);
 
-        jSeparator9.setBackground(new Color(0,0,0,0)
-        );
-        jSeparator9.setForeground(new Color(0,0,0,0));
-        jSeparator9.setMaximumSize(new java.awt.Dimension(33, 32767));
-        jSeparator9.setMinimumSize(new java.awt.Dimension(30, 10));
-        jSeparator9.setPreferredSize(new java.awt.Dimension(10, 10));
-        SendPanel.add(jSeparator9);
-
-        btnSendAll.setBackground(new java.awt.Color(255, 211, 105));
+        btnSendAll.setBackground(new java.awt.Color(78, 205, 196));
         btnSendAll.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         btnSendAll.setText("all Send this");
         btnSendAll.setMaximumSize(new java.awt.Dimension(120, 28));
@@ -248,17 +148,8 @@ public class ClientManger extends javax.swing.JFrame {
                 btnSendAllActionPerformed(evt);
             }
         });
-        SendPanel.add(btnSendAll);
 
-        jSeparator8.setBackground(new Color(0,0,0,0)
-        );
-        jSeparator8.setForeground(new Color(0,0,0,0));
-        jSeparator8.setMaximumSize(new java.awt.Dimension(40, 10));
-        jSeparator8.setMinimumSize(new java.awt.Dimension(40, 10));
-        jSeparator8.setPreferredSize(new java.awt.Dimension(40, 10));
-        SendPanel.add(jSeparator8);
-
-        btnDisconnected.setBackground(new java.awt.Color(255, 211, 105));
+        btnDisconnected.setBackground(new java.awt.Color(78, 205, 196));
         btnDisconnected.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         btnDisconnected.setForeground(new java.awt.Color(51, 0, 0));
         btnDisconnected.setText("Disconnected");
@@ -269,39 +160,92 @@ public class ClientManger extends javax.swing.JFrame {
                 btnDisconnectedActionPerformed(evt);
             }
         });
-        SendPanel.add(btnDisconnected);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(commanmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commanmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SendPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnSendAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDisconnected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(commanmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(SendPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 131, Short.MAX_VALUE)
+                        .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSendAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDisconnected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-       client.SendToServer(lblMessage.getText() + "\r\n");
+
+       new SwingWorker<Void, Void>() {
+        @Override
+        protected Void doInBackground() {
+  
+       List<String> nonEmptyLines = lblMessage.getText().lines().filter(s -> !s.isBlank()).collect(Collectors.toList());
+       if(nonEmptyLines.isEmpty()) return null;
+       progressBar.setValue(0);
+       progressBar.setVisible(true);
+       progressBar.setMaximum(nonEmptyLines.size());
+       progressBar.setStringPainted(true);
+       setEnable(false);
+       for(String message : nonEmptyLines)
+       {
+            client.SendToServer("%s\r\n".formatted(message));
+     
+           progressBar.setValue(progressBar.getValue() + 1);
+       }
         update();
+        progressBar.setVisible(true); 
+        
+       return null;
+        }
+
+        @Override
+        protected void done()
+        {
+           
+             setEnable(true);
+            btnSendAll.setText("all Send this");
+            progressBar.setVisible(false);
+         
+        }
+    }.execute();
+          
+
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnDisconnectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectedActionPerformed
@@ -310,48 +254,54 @@ public class ClientManger extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDisconnectedActionPerformed
 
     private void btnSendAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAllActionPerformed
-   
-        String msg = lblMessage.getText();
-  
-       if(msg.length() == 0)
-           return ;
-           System.out.println("-- waiting ");
-      btnSendAll.setEnabled(false);
-      btnSendAll.setText("Wait ..."); //all Send this
 
+       new SwingWorker<Void, Void>() {
+        @Override
+        protected Void doInBackground() {
+        List<String> nonEmptyLines = lblMessage.getText().lines().filter(s -> !s.isBlank()).collect(Collectors.toList());
+       
+        if(nonEmptyLines.isEmpty()) return null;
+       progressBar.setValue(0);
+       progressBar.setVisible(true);
+       progressBar.setMaximum(nonEmptyLines.size() * ClientPanel.clinets.size());  
+       progressBar.setStringPainted(true);
+       setEnable(false);
+       btnSendAll.setText("Wait ..."); //all Send this
        for(ClientPanel clt : ClientPanel.clinets)
        {
-            clt.client.SendToServer(msg + "\r\n"); 
-            //   System.out.println("-- finished --  " + msg); 
+         for(String message : nonEmptyLines)
+        {
+            clt.client.SendToServer("%s\r\n".formatted(message));
+            progressBar.setValue(progressBar.getValue() + 1);
+        }
        } 
-     btnSendAll.setEnabled(true);
-     btnSendAll.setText("all Send this");
-    System.out.println("-- finished  ");
+        
+       return null;
+        }
+
+        @Override
+        protected void done()
+        {
+             btnSendAll.setEnabled(true);
+             setEnable(true);
+             lblMessage.setText("");
+            btnSendAll.setText("all Send this");
+            progressBar.setVisible(false);
+         
+        }
+    }.execute();
+
+    
     }//GEN-LAST:event_btnSendAllActionPerformed
 
-    private void lblMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMessageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblMessageActionPerformed
-
-    private void btnJoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJoinActionPerformed
-       lblMessage.setText("JOIN # ");
-    }//GEN-LAST:event_btnJoinActionPerformed
-
-    private void btnPrivmsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrivmsgActionPerformed
-       lblMessage.setText("PRIVMSG ");
-    }//GEN-LAST:event_btnPrivmsgActionPerformed
-
-    private void btnPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartActionPerformed
-            lblMessage.setText("PART # ");
-    }//GEN-LAST:event_btnPartActionPerformed
-
-    private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
-         lblMessage.setText("QUIT ");
-    }//GEN-LAST:event_btnQuitActionPerformed
-
+    private void setEnable(boolean ststus){
     
+        btnDisconnected.setEnabled(ststus);
+        btnSend.setEnabled(ststus);
+        btnSendAll.setEnabled(ststus);
+    }
     
-public void  SetViewCliet(ircClient client)
+public void  SetViewCliet(IrcClient client)
 {
        this.client = client;
        update();
@@ -379,46 +329,32 @@ public void update()
              lblStatus.setForeground(Color.green);
     else 
              lblStatus.setForeground(Color.red);
-    boolean enable = client.status == ircClient.STATUS_CONNECTED;
+    boolean enable = client.status == IrcClient.STATUS_CONNECTED;
     
-    btnDisconnected.setEnabled(enable);
-    btnSend.setEnabled(enable);
-    btnSendAll.setEnabled(enable);
-    
-    btnPrivmsg.setEnabled(enable);
-    btnPart.setEnabled(enable);
-    btnQuit.setEnabled(enable);
-    btnJoin.setEnabled(enable);
-             
-     lblStatus.setText(client.getStatusText());
-     lblName.setText(client.getClientName());  
-     txtClientData.setText(client.getData());
+    setEnable(enable);
+   
+    lblStatus.setText(client.getStatusText());
+    lblName.setText(client.getClientName());  
+    txtClientData.setText(client.getData());
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel SendPanel;
     private javax.swing.JButton btnDisconnected;
-    private javax.swing.JButton btnJoin;
-    private javax.swing.JButton btnPart;
-    private javax.swing.JButton btnPrivmsg;
-    private javax.swing.JButton btnQuit;
     private javax.swing.JButton btnSend;
     private javax.swing.JButton btnSendAll;
     private javax.swing.JPanel commanmPanel;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField lblMessage;
+    private javax.swing.JTextPane lblMessage;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblStatus;
-    private javax.swing.JLabel lblStatus1;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JTextArea txtClientData;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/ircClient.java</file>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/ClientManger.java</file>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/ClientConnector.java</file>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/Frame.java</file>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/ClientPanel.java</file>
-            <file>file:/home/alphaben/NetBeansProjects/IrcMulitCleint/src/alphaben/irc/ClinetMintor.java</file>
+            <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/ClientManger.java</file>
+            <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/IrcClient.java</file>
         </group>
     </open-files>
 </project-private>

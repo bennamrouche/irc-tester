@@ -10,16 +10,16 @@ public class ClinetMintor implements Runnable
          {
              try
              {
-                  Thread.sleep(500);
-            for(ClientPanel clt : ClientPanel.clinets)
-            {
-                    clt.updateView();
-            }                 
-                ClientManger.getInctance().updateData();
-//                 if (GlobalConfig.command  2)
-                     Frame.instance.runCommand();
+                Thread.sleep(45);
+                ClientPanel.clinets.forEach(ClientPanel::updateView);
+               
+                  ClientManger.getInctance().updateData();
+                
+               Frame.instance.runCommand();
              }catch(Exception ex)
              {
+
+                 System.err.printf("Error:[%s] %s",ex.getClass().getName(),ex.getMessage());
              }
            
         

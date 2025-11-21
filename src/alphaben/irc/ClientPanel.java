@@ -2,13 +2,10 @@ package alphaben.irc;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class ClientPanel extends javax.swing.JPanel {
 
-    ircClient client = null;
+    IrcClient client = null;
     public static ArrayList<ClientPanel> clinets = new ArrayList<>();
      
 public ClientPanel()
@@ -16,18 +13,13 @@ public ClientPanel()
         initComponents();
 }
   
-  public ClientPanel(ircClient client) 
+  public ClientPanel(IrcClient client) 
   {
-     initComponents();
-     
+        initComponents();
         this.client = client; 
         clinets.add(this);
         updateView();
-       
-//        this.setSize(100, 70);
-//        this.setPreferredSize(this.getSize());
-//        this.setMinimumSize(this.getSize());
-//        this.setMaximumSize(this.getSize());
+     
   }
 
 
@@ -39,9 +31,11 @@ public ClientPanel()
         lblClientName = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblLastMessage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(57, 62, 70));
         setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 153)));
+        setForeground(new java.awt.Color(255, 140, 66));
 
         lblClientName.setBackground(new java.awt.Color(255, 255, 255));
         lblClientName.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
@@ -54,7 +48,7 @@ public ClientPanel()
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStatus.setText("Connected");
 
-        jButton1.setBackground(new java.awt.Color(255, 211, 105));
+        jButton1.setBackground(new java.awt.Color(78, 205, 196));
         jButton1.setFont(new java.awt.Font("Lato Semibold", 1, 15)); // NOI18N
         jButton1.setForeground(new java.awt.Color(3, 0, 28));
         jButton1.setText("view");
@@ -64,6 +58,13 @@ public ClientPanel()
             }
         });
 
+        lblLastMessage.setForeground(new java.awt.Color(255, 140, 66));
+        lblLastMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLastMessage.setText("-- -- -- --");
+        lblLastMessage.setMaximumSize(new java.awt.Dimension(400, 22));
+        lblLastMessage.setMinimumSize(new java.awt.Dimension(400, 22));
+        lblLastMessage.setPreferredSize(new java.awt.Dimension(400, 22));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,9 +73,11 @@ public ClientPanel()
                 .addComponent(lblClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(26, 26, 26)
+                .addComponent(lblLastMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +85,8 @@ public ClientPanel()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(lblClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE))
+                    .addComponent(lblClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(lblLastMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -93,6 +97,13 @@ public ClientPanel()
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
+    public static String getLastLine(String text) {
+        if (text == null || text.isEmpty()) return "";
+        String[] lines = text.split("\\R"); 
+        String lastLine = lines[lines.length - 1];
+        return lastLine.length() > 30 ? lastLine.substring(lastLine.length()- 30, lastLine.length()- 1)  : lastLine;
+    }
+    
   public void updateView()
  {        
         if (client.status == 0)
@@ -102,23 +113,27 @@ public ClientPanel()
         
     try {
       
-        client.ReicveFromServer();
+        String newMesssage = client.ReicveFromServer();        
+        if(newMesssage != null) {
+            this.lblLastMessage.setText(getLastLine(newMesssage));
+        }
+        
         lblStatus.setText(client.getStatusText());
         
         } catch (Exception ex) 
         {
-           client.status = ircClient.STATUS_ERROR;
+           client.status = IrcClient.STATUS_ERROR;
            client.insertData("Erorr#> " + GlobalConfig.ERR_REICEVE_FROM);
-            Logger.getLogger(ClientPanel.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println(ex.getMessage());
         }
         lblClientName.setText(client.getClientName());
                 
     }
     
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblClientName;
+    private javax.swing.JLabel lblLastMessage;
     private javax.swing.JLabel lblStatus;
     // End of variables declaration//GEN-END:variables
 }

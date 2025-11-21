@@ -1,24 +1,62 @@
 
 package alphaben.irc;
+import java.net.Socket;
+import java.io.IOException;
 
 public class GlobalConfig 
 {
-    public static String  SERVER_DISCONNECTED = "Server  Disconected"; 
+    public static String  SERVER_DISCONNECTED =     "Server  Disconected"; 
     
-     public static String  ERR_SEND_TO_SERVER = "Error : while Send To Server "; 
-     public static String  ERR_REICEVE_FROM  = "Error: while Send To Server "; 
-     public static String  ERR_CON_SERVER  ="Error : failed connecting   to server";
-     public static String  EMPTY_FIELDS   ="Empty Address or Port or PassWord  !";
-     public static Thread Mintor = new  Thread(new ClinetMintor());
-     public static int port = 8080;
-     public static String HOST =  "localhost";
-     public static String SERVER_PASS = "root" ;
-     public static int  command  = 0;
+     public static String  ERR_SEND_TO_SERVER   =   "Error : while Send To Server "; 
+     public static String  ERR_REICEVE_FROM     =   "Error: while Send To Server "; 
+     public static String  ERR_CON_SERVER       =   "Error : failed connecting   to server";
+     public static String  EMPTY_FIELDS         =   "Empty Address or Port or PassWord ...!";
+     public static String  CLIENT_NEGATIVE_ERROR    =   "Client count must be strcit positive ";
+     public static String  BAD_PORT_CLIENT_COUNT    =   "Bad Port or Client Count ";
+     
+     public static Thread   Mintor = new  Thread(new ClinetMintor());
+     
+     public static int      port            =         8080;
+     public static String   HOST            =        "localhost";
+     public static String   SERVER_PASS     =        "root" ;
+     public static int      command         =        0;
     
   
-      public static final int   Start  =  1;
-      public static final int   Stop   =  2;
-      public static final int   SendToAll = 3;
+      public static final int   Start       =  1;
+      public static final int   Stop        =  2;
+      public static final int   SendToAll   =  3;
+      
+     private  static  long      download        =  0;
+     private  static  long       upload       =  0;
+     
+     
+    public static String  getDownloadSize(){
+        return  ByteFormater.formatBytes(download);
+    }
+    
+    public static String getUploadSize(){
+        return ByteFormater.formatBytes(upload);
+    }
+    public static void reset(){
+        download = 0;
+        upload  = 0;
+    }
+    
+    
+    public static void send(Socket sock, byte[] data)throws IOException {
+        
+        sock.getOutputStream().write(data);
+        sock.getOutputStream().flush();
+        
+        upload  += data.length; 
+    }
+    
+     public static byte[]  recieve(Socket sock, int  size)throws IOException {
+         byte[] data = new byte[size]; 
+        int count = sock.getInputStream().read(data);
+        download += count <= 0 ? 0 : count;  
+        return data;
+    }
    
      
       public static  String[] names = {
