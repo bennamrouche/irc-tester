@@ -5,6 +5,9 @@
         <group>
             <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/ClientManger.java</file>
             <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/IrcClient.java</file>
+            <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/ByteFormater.java</file>
+            <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/ClientPanel.java</file>
+            <file>file:/home/ebennamr/Documents/irc-tester/src/alphaben/irc/Frame.java</file>
         </group>
     </open-files>
 </project-private>

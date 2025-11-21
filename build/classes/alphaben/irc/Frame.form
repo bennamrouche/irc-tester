@@ -396,7 +396,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="33" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Upload : 45.5Gb  "/>
+        <Property name="text" type="java.lang.String" value="Upload : 0B  "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDownload">
@@ -407,7 +407,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="ff" red="99" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Dowlonad  : 45.5Gb  "/>
+        <Property name="text" type="java.lang.String" value="Dowlonad  :  0B "/>
       </Properties>
     </Component>
   </SubComponents>

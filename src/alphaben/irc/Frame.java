@@ -168,7 +168,6 @@ public class Frame extends javax.swing.JFrame {
         txtClientCount.setForeground(new java.awt.Color(78, 205, 196));
         txtClientCount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtClientCount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClientCount.setText("200");
         txtClientCount.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         txtClientCount.setMaximumSize(new java.awt.Dimension(60, 28));
         txtClientCount.setMinimumSize(new java.awt.Dimension(60, 28));
@@ -195,11 +194,11 @@ public class Frame extends javax.swing.JFrame {
         lblUpload.setBackground(new java.awt.Color(255, 51, 102));
         lblUpload.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         lblUpload.setForeground(new java.awt.Color(255, 51, 102));
-        lblUpload.setText("Upload : 45.5Gb  ");
+        lblUpload.setText("Upload : 0B  ");
 
         lblDownload.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         lblDownload.setForeground(new java.awt.Color(153, 255, 153));
-        lblDownload.setText("Dowlonad  : 45.5Gb  ");
+        lblDownload.setText("Dowlonad  :  0B ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
