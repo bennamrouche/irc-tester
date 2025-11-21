@@ -1,6 +1,14 @@
-> ⚡ **Note:** Version 2.0 is coming soon! Switch to the [`v2` branch](https://github.com/bennamrouche/ircMultiClient/tree/v2) to try the latest features.
+🚀 Version 2.0  
 
+Version 2.0 is now officially released.
+This update brings a redesigned interface, better performance.
+## 🚀 v2 Features
 
+✨ **Refreshed UI**  
+🔢 **Flexible Client Count**  
+📊 **Real-Time Data Transfer Stats**  
+🧩 **Multi-Command Execution**  
+📥 **Last Received Message Tracking**
 
 ![Netbeans](https://github.com/bennamrouche/ircMultiClient/assets/107180422/dfafeef3-c817-4a35-825c-e6f47ce429a7)  <b>  code build using  Netbeans IDE  </b>
 
@@ -14,9 +22,10 @@
 </p>
 
 # 42 irc Server Tester  
-# IrcMultiClient  
-IrcMultiClient is a Java Gui Program that connects 200 clients to an IRC Server and joins them to a channel named room.  
-It can send/receive messages between clients and join other channels.
+### IrcMultiClient
+
+IrcMultiClient is a Java GUI application for stress-testing IRC servers by spawning and managing multiple IRC clients.  
+It connects a custom number of clients to an IRC server, auto-joins them to a default **room** channel, and allows sending/receiving messages between all clients. Additional channels can be joined dynamically.
 
 # How to run  
 ## Use a Jar file
@@ -39,27 +48,26 @@ make build
 # Run Program
 make run
 ```
+# How to Use (v2)
 
-# How to use  
 ## Step 1
-Enter IP, Port, Password , Client count
-Click the Start button  
+Enter the **IP**, **Port**, **Password**, and **Client Count**, then click **Start**.  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step1.png)
 
 ## Step 2
-Click the View Button of any Clients.  
-In this Example:  
+Click the **View** button of any client to open its session.  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step2.png)
 
 ## Step 3
-write any command in textArea.   
+Type any command in the text area and send it.  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step3.png)
 
 ## Step 4
-You will see the message is sent to Mary.  
+The sent message will appear in the target client window.  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step4.png)
 
 ## Step 5
-Check if Mary is receiving the message by clicking the View button.  
+Check the **Main Window** to see the last received message appear automatically.  
 ![](https://github.com/bennamrouche/ircMultiClient/blob/master/image/step5.png)
-```
+
+
