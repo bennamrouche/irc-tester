@@ -27,9 +27,12 @@ public class IrcClient
             String pass = String.format("PASS %s\r\n", GlobalConfig.SERVER_PASS);
             String nick = String.format("NICK %s\r\n", name);
             String user = String.format("USER %s 0 * %srm\r\n", name, name);
+            
             String join = "JOIN #room\r\n";
+            
             String strAuth = "authentication : \n%s%s%s%s\n".formatted(pass , nick ,  user , join );
             insertData(strAuth);
+
             
             sendWithDelay(pass);
             sendWithDelay(nick);
@@ -46,6 +49,7 @@ public class IrcClient
     }
  
 // /**
+//  *
 //  * 
 //  * @see this is a Constructor  
 //  */

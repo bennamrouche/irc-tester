@@ -2,7 +2,6 @@
 package alphaben.irc;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -358,8 +357,10 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
    
-    public static void main(String args[]) {
-
+    public static void main(String args[]) {            
+ 
+        System.err.close(); // this for avoid unkow graphic exception 
+       
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
