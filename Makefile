@@ -3,6 +3,7 @@ SRC =  src/alphaben/irc/ClientManger.java \
 		src/alphaben/irc/ClientPanel.java  \
 		src/alphaben/irc/ClinetMintor.java  \
 		src/alphaben/irc/Frame.java \
+		src/alphaben/irc/ByteFormater.java \
 		src/alphaben/irc/GlobalConfig.java  \
 		src/alphaben/irc/ircClient.java
 build: $(SRC)
