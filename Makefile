@@ -1,4 +1,3 @@
-
 SRC =  src/alphaben/irc/ClientManger.java \
 		src/alphaben/irc/ClientPanel.java  \
 		src/alphaben/irc/ClinetMintor.java  \

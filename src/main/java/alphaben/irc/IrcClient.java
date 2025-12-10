@@ -167,9 +167,9 @@ public  String getStatusText()
 {
     
     switch (status) {
-        case -1 : return            "Error";
-        case STATUS_CONNECTED       : return "Connected";
-        case STATUS_DISCONNECTED    :   return "Disconnected";    
+        case -1 : return                    "Error";
+        case STATUS_CONNECTED       :       return "Connected";
+        case STATUS_DISCONNECTED    :       return "Disconnected";    
  }
     return "Undfined";
 }

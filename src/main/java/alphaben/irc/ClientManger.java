@@ -8,8 +8,8 @@ import javax.swing.SwingWorker;
 
 public class ClientManger extends javax.swing.JFrame {
   
-    private IrcClient client;
-    private static  ClientManger instance = null;
+    private IrcClient               client;
+    private static              ClientManger instance = null;
     
  public ClientManger() 
  {
@@ -301,7 +301,7 @@ public class ClientManger extends javax.swing.JFrame {
         btnSendAll.setEnabled(ststus);
     }
     
-public void  SetViewCliet(IrcClient client)
+public void  setViewCliet(IrcClient client)
 {
        this.client = client;
        update();
