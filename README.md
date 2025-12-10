@@ -21,33 +21,26 @@ This update brings a redesigned interface, better performance.
 <a href="https://www.leetcode.com/alphaben" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="alphaben" height="30" width="40" /></a>
 </p>
 
-# 42 irc Server Tester  
-### IrcMultiClient
+# 42 Irc Server Tester  
+### Irc Tester
 
-IrcMultiClient is a Java GUI application for stress-testing IRC servers by spawning and managing multiple IRC clients.  
+Irc tester is a Java GUI application for stress-testing IRC servers by spawning and managing multiple IRC clients.  
 It connects a custom number of clients to an IRC server, auto-joins them to a default **room** channel, and allows sending/receiving messages between all clients. Additional channels can be joined dynamically.
 
 # How to run  
 ## Use a Jar file
 ```bash
-# note this jar file compile with Java 11
-# use
-java --version
-    java 11.0.17 2022-10-18 LTS
-    Java(TM) SE Runtime Environment 18.9 (build 11.0.17+10-LTS-269)
-    Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.17+10-LTS-269, mixed mode)
+#Note:  This JAR  file was compiled  with Java 17
+#Check if Java exists  
+java -version 
+    openjdk version "17.0.17" 2025-10-21
+    OpenJDK Runtime Environment (build 17.0.17+10-Ubuntu-122.04)
+    OpenJDK 64-Bit Server VM (build 17.0.17+10-Ubuntu-122.04, mixed mode, sharing
 
-cd dist  
-java -jar IrcMulitClient.jar
+cd bin  
+java -jar irc-tester-2-alpha.jar
 ```
 
-## Use Makefile
-```bash
-# compile code
-make build
-# Run Program
-make run
-```
 # How to Use (v2)
 
 ## Step 1
