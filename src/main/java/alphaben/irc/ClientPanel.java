@@ -113,7 +113,7 @@ public ClientPanel()
         
     try {
       
-        String newMesssage = client.ReicveFromServer();        
+        String newMesssage = client.receiveFromServer();        
         if(newMesssage != null) {
             this.lblLastMessage.setText(getLastLine(newMesssage));
         }

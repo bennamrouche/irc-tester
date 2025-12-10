@@ -248,6 +248,15 @@ public class Frame extends javax.swing.JFrame {
                GlobalConfig.command = 0;
     }
     
+   private String generateNameFor(int index){
+            
+       if(index < GlobalConfig.names.length){
+                return   GlobalConfig.names[index];
+              } 
+            
+          return GlobalConfig.names[index  % 200] + "_" + index;
+                      
+   }
    public void runCommand()
    {
        
@@ -305,13 +314,8 @@ public class Frame extends javax.swing.JFrame {
 
         for(int i = 0; i<  clientCount; i++)
         {
-            String name;
-              if(i < GlobalConfig.names.length){
-                name =  GlobalConfig.names[i];
-              } else {
-                   name =  GlobalConfig.names[i % 200] + (char)((int)'a' + (i % 25));
-              }
-                    
+            String name = generateNameFor(i);
+              
             this.clinetContainer.add(new ClientPanel(new IrcClient(StringAddress,port, name)));
              this.validate();
         }
