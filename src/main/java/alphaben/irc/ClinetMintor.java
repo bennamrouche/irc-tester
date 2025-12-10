@@ -1,6 +1,8 @@
 
 package alphaben.irc;
 
+import java.util.concurrent.TimeUnit;
+
 public class ClinetMintor implements Runnable
 {
     @Override
@@ -10,12 +12,15 @@ public class ClinetMintor implements Runnable
          {
              try
              {
-                Thread.sleep(45);
-                ClientPanel.clinets.forEach(ClientPanel::updateView);
+                 
+            TimeUnit.MILLISECONDS.sleep(45);   
+            
+            ClientPanel.clinets.forEach(ClientPanel::updateView);
+            
+            ClientManger.getInctance().updateData();
+            
+            Frame.instance.runCommand();
                
-                  ClientManger.getInctance().updateData();
-                
-               Frame.instance.runCommand();
              }catch(Exception ex)
              {
 

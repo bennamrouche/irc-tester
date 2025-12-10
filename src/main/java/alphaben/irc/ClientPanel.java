@@ -18,7 +18,7 @@ public ClientPanel()
         initComponents();
         this.client = client; 
         clinets.add(this);
-        updateView();
+        this.updateView();
      
   }
 
@@ -93,7 +93,7 @@ public ClientPanel()
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClientManger.getInctance().setVisible(true);
-        ClientManger.getInctance().SetViewCliet(client);
+        ClientManger.getInctance().setViewCliet(client);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -113,7 +113,7 @@ public ClientPanel()
         
     try {
       
-        String newMesssage = client.ReicveFromServer();        
+        String newMesssage = client.receiveFromServer();        
         if(newMesssage != null) {
             this.lblLastMessage.setText(getLastLine(newMesssage));
         }

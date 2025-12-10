@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class Frame extends javax.swing.JFrame { 
-    boolean isRunning = false;
-    static  Frame instance  = null;
+    boolean    isRunning            = false;
+    static     Frame instance  = null;
    
     
     public Frame() 
@@ -242,31 +242,42 @@ public class Frame extends javax.swing.JFrame {
     
     private  void validationError(String s){
     
-                JOptionPane.showMessageDialog(null, s);
-               btnStart.setText("Start");
+               JOptionPane.showMessageDialog(null, s);
+              btnStart.setText("Start");
               btnStart.setEnabled(true);
-                GlobalConfig.command = 0;
+               GlobalConfig.command = 0;
     }
     
+   private String generateNameFor(int index){
+            
+       if(index < GlobalConfig.names.length){
+                return   GlobalConfig.names[index];
+              } 
+            
+          return GlobalConfig.names[index  % 200] + "_" + index;
+                      
+   }
    public void runCommand()
    {
        
        
        
         
-        if  (GlobalConfig.command == GlobalConfig.Start)
+        if  (GlobalConfig.command == GlobalConfig.START_COMMAND)
         {  
             
+        
            btnStart.setText("Stop");
            
-           String   StringAddress     = txtAddress.getText();
-           String   StringPort       = txtPort.getText();
-           String   StringPassword   = txtPassword.getText();
-           int port         = 0;
-           int clientCount  = 0;
-        if(StringAddress.trim().isEmpty() || StringPort.trim().isEmpty()  || StringPassword.trim().isEmpty())
+           String   StringAddress       = txtAddress.getText();
+           String   StringPort          = txtPort.getText();
+           String   StringPassword      = txtPassword.getText();
+           
+           int port;
+           int clientCount;
+        
+           if(StringAddress.trim().isEmpty() || StringPort.trim().isEmpty()  || StringPassword.trim().isEmpty())
         {
-  
               validationError(GlobalConfig.EMPTY_FIELDS);
         
                   return;
@@ -292,26 +303,26 @@ public class Frame extends javax.swing.JFrame {
              validationError(GlobalConfig.BAD_PORT_CLIENT_COUNT);
               return;
         }
+        if(!GlobalConfig.isServerReachable(StringAddress, port, 1000)){
+            validationError(GlobalConfig.CONNECT_FAIL);
+              return;
+        }
+        
         GlobalConfig.SERVER_PASS = StringPassword;
         clinetContainer.removeAll();
         clinetContainer.setLayout(new BoxLayout(clinetContainer, BoxLayout.Y_AXIS));
 
         for(int i = 0; i<  clientCount; i++)
         {
-            String name;
-              if(i < GlobalConfig.names.length){
-                name =  GlobalConfig.names[i];
-              } else {
-                   name =  GlobalConfig.names[i % 200] + (char)((int)'a' + (i % 25));
-              }
-                    
+            String name = generateNameFor(i);
+              
             this.clinetContainer.add(new ClientPanel(new IrcClient(StringAddress,port, name)));
              this.validate();
         }
         
         GlobalConfig.command = 0;
      }// end if check is runnig 
-        else if (GlobalConfig.command == GlobalConfig.Stop)
+        else if (GlobalConfig.command == GlobalConfig.STOP_COMMAND)
         {   
             for (ClientPanel pn : ClientPanel.clinets)
             {
@@ -345,10 +356,8 @@ public class Frame extends javax.swing.JFrame {
     
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
            btnStart.setEnabled(false);
-           if (isRunning)
-                    GlobalConfig.command = GlobalConfig.Stop;
-           else 
-                  GlobalConfig.command = GlobalConfig.Start;
+          GlobalConfig.command  = isRunning ?  GlobalConfig.STOP_COMMAND :  GlobalConfig.START_COMMAND;
+      
         
     }//GEN-LAST:event_btnStartActionPerformed
 

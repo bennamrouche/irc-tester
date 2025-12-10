@@ -8,8 +8,8 @@ import javax.swing.SwingWorker;
 
 public class ClientManger extends javax.swing.JFrame {
   
-    private IrcClient client;
-    private static  ClientManger instance = null;
+    private IrcClient               client;
+    private static              ClientManger instance = null;
     
  public ClientManger() 
  {
@@ -224,7 +224,7 @@ public class ClientManger extends javax.swing.JFrame {
        setEnable(false);
        for(String message : nonEmptyLines)
        {
-            client.SendToServer("%s\r\n".formatted(message));
+            client.sendToServer("%s\r\n".formatted(message));
      
            progressBar.setValue(progressBar.getValue() + 1);
        }
@@ -249,7 +249,7 @@ public class ClientManger extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnDisconnectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectedActionPerformed
-            client.Disconnected();
+            client.disconnect();
             update();
     }//GEN-LAST:event_btnDisconnectedActionPerformed
 
@@ -271,7 +271,7 @@ public class ClientManger extends javax.swing.JFrame {
        {
          for(String message : nonEmptyLines)
         {
-            clt.client.SendToServer("%s\r\n".formatted(message));
+            clt.client.sendToServer("%s\r\n".formatted(message));
             progressBar.setValue(progressBar.getValue() + 1);
         }
        } 
@@ -301,7 +301,7 @@ public class ClientManger extends javax.swing.JFrame {
         btnSendAll.setEnabled(ststus);
     }
     
-public void  SetViewCliet(IrcClient client)
+public void  setViewCliet(IrcClient client)
 {
        this.client = client;
        update();
@@ -324,11 +324,10 @@ public void update()
      
      lblMessage.setText("");
      txtClientData.setText("");
-     
-    if (client.status == 0)
-             lblStatus.setForeground(Color.green);
-    else 
-             lblStatus.setForeground(Color.red);
+    
+    Color color =  client.status == 0 ? Color.green : Color.red;
+   
+     lblStatus.setForeground(color);
     boolean enable = client.status == IrcClient.STATUS_CONNECTED;
     
     setEnable(enable);

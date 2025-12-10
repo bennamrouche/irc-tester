@@ -85,7 +85,12 @@ public IrcClient(String ServerAddress ,int port,String name)
         }
 }
 
-public void Disconnected()
+/**
+ * @since 1.0
+ * disconnect the client 
+ *  
+ */
+public void disconnect()
 {
     try
     {
@@ -103,8 +108,12 @@ public void Disconnected()
    
 }
 
-
-public void SendToServer(String bytes)
+/**
+ * 
+ * @param bytes 
+ * send message to server 
+ */
+public void sendToServer(String bytes)
 {
     if (status != 0)
         return;     
@@ -129,7 +138,10 @@ public void SendToServer(String bytes)
     } 
 }
 
-public String  ReicveFromServer()
+/**
+ * @retun String message received from the server   
+*/
+public String  receiveFromServer()
 {
     try {
         
@@ -167,9 +179,9 @@ public  String getStatusText()
 {
     
     switch (status) {
-        case -1 : return            "Error";
-        case STATUS_CONNECTED       : return "Connected";
-        case STATUS_DISCONNECTED    :   return "Disconnected";    
+        case -1 : return                    "Error";
+        case STATUS_CONNECTED       :       return "Connected";
+        case STATUS_DISCONNECTED    :       return "Disconnected";    
  }
     return "Undfined";
 }

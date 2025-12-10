@@ -2,17 +2,18 @@
 package alphaben.irc;
 import java.net.Socket;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 
 public class GlobalConfig 
 {
-    public static String  SERVER_DISCONNECTED =     "Server  Disconected"; 
-    
-     public static String  ERR_SEND_TO_SERVER   =   "Error : while Send To Server "; 
-     public static String  ERR_REICEVE_FROM     =   "Error: while Send To Server "; 
-     public static String  ERR_CON_SERVER       =   "Error : failed connecting   to server";
-     public static String  EMPTY_FIELDS         =   "Empty Address or Port or PassWord ...!";
+     public static String  SERVER_DISCONNECTED      =     "Server  Disconected"; 
+     public static String  ERR_SEND_TO_SERVER       =   "Error : while Send To Server "; 
+     public static String  ERR_REICEVE_FROM         =   "Error: while Send To Server "; 
+     public static String  ERR_CON_SERVER           =   "Error : failed connecting   to server";
+     public static String  EMPTY_FIELDS             =   "Empty Address or Port or PassWord ...!";
      public static String  CLIENT_NEGATIVE_ERROR    =   "Client count must be strcit positive ";
      public static String  BAD_PORT_CLIENT_COUNT    =   "Bad Port or Client Count ";
+        public static String  CONNECT_FAIL           =   "Fail to Connect the server ";
      
      public static Thread   Mintor = new  Thread(new ClinetMintor());
      
@@ -22,12 +23,12 @@ public class GlobalConfig
      public static int      command         =        0;
     
   
-      public static final int   Start       =  1;
-      public static final int   Stop        =  2;
-      public static final int   SendToAll   =  3;
+      public static final int   START_COMMAND        =  1;
+      public static final int   STOP_COMMAND         =  2;
+      public static final int   SEND_TO_ALL_COMMAND  =  3;
       
-     private  static  long      download        =  0;
-     private  static  long       upload       =  0;
+     private  static  long      download            =  0;
+     private  static  long      upload              =  0;
      
      
     public static String  getDownloadSize(){
@@ -51,7 +52,7 @@ public class GlobalConfig
         upload  += data.length; 
     }
     
-     public static byte[]  recieve(Socket sock, int  size)throws IOException {
+    public static byte[]  recieve(Socket sock, int  size)throws IOException {
          byte[] data = new byte[size]; 
         int count = sock.getInputStream().read(data);
         download += count <= 0 ? 0 : count;  
@@ -81,5 +82,23 @@ public class GlobalConfig
             "Charlotte", "Vincent", "Natalie", "Mason", "Theresa", "Roy", "Diana", "Ralph", "Brittany", "Bobby",
             "Doris", "Russell", "Kayla", "Bradley", "Alexis", "Philip", "Lori", "Eugene", "Marie"
         };
+      
+      
+        /**
+     * Tests if a server is reachable at the given address and port.
+     *
+     * @param address The server hostname or IP.
+     * @param port    The server port.
+     * @param timeout Timeout in milliseconds.
+     * @return true if reachable, false otherwise.
+     */
+    public static boolean isServerReachable(String address, int port, int timeout) {
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress(address, port), timeout);
+            return true;  // connection successful
+        } catch (IOException e) {
+            return false; // cannot connect
+        }
+    }
         
 }
