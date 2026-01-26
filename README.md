@@ -1,3 +1,19 @@
+## Star History
+
+<a href="https://www.star-history.com/#bennamrouche/irc-tester&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=bennamrouche/irc-tester&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=bennamrouche/irc-tester&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=bennamrouche/irc-tester&type=date&legend=top-left" />
+ </picture>
+</a>
+
+
+
+
+
+
+
 🚀 Version 2.0  
 
 Version 2.0 is now officially released.
