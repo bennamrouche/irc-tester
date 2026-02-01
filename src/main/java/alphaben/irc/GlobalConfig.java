@@ -6,8 +6,8 @@ import java.net.InetSocketAddress;
 
 public class GlobalConfig 
 {
-     public static String  SERVER_DISCONNECTED      =     "Server  Disconected"; 
-     public static String  ERR_SEND_TO_SERVER       =   "Error : while Send To Server "; 
+     public static String  SERVER_DISCONNECTED      =    "Server  Disconected"; 
+     public static String  ERR_SEND_TO_SERVER       =    "Error : while Send To Server "; 
      public static String  ERR_REICEVE_FROM         =   "Error: while Send To Server "; 
      public static String  ERR_CON_SERVER           =   "Error : failed connecting   to server";
      public static String  EMPTY_FIELDS             =   "Empty Address or Port or PassWord ...!";

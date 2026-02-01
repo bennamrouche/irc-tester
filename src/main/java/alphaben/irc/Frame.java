@@ -2,13 +2,16 @@
 package alphaben.irc;
 
 import java.awt.Color;
+import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Frame extends javax.swing.JFrame { 
-    boolean    isRunning            = false;
-    static     Frame instance  = null;
+    boolean    isRunning                = false;
+    static     Frame instance           = null;
    
     
     public Frame() 
@@ -62,15 +65,13 @@ public class Frame extends javax.swing.JFrame {
         ScrollPane.setAutoscrolls(true);
 
         clinetContainer.setBackground(new java.awt.Color(57, 62, 70));
-        clinetContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
         clinetContainer.setLayout(null);
 
         lblNoClient.setFont(new java.awt.Font("Cantarell Extra Bold", 1, 24)); // NOI18N
-        lblNoClient.setForeground(new java.awt.Color(78, 205, 196));
         lblNoClient.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNoClient.setText("No Client");
+        lblNoClient.setText("Irc Tester v2.1");
         clinetContainer.add(lblNoClient);
-        lblNoClient.setBounds(2, 1, 730, 410);
+        lblNoClient.setBounds(-48, 1, 950, 450);
 
         ScrollPane.setViewportView(clinetContainer);
 
@@ -78,7 +79,7 @@ public class Frame extends javax.swing.JFrame {
         Menu.setLayout(new javax.swing.BoxLayout(Menu, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 140, 66));
+        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ip");
         jLabel1.setMaximumSize(new java.awt.Dimension(30, 28));
@@ -86,12 +87,9 @@ public class Frame extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 28));
         Menu.add(jLabel1);
 
-        txtAddress.setBackground(new java.awt.Color(57, 62, 70));
         txtAddress.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        txtAddress.setForeground(new java.awt.Color(78, 205, 196));
         txtAddress.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAddress.setText("127.0.0.1");
-        txtAddress.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(78, 205, 196), 2, true));
         txtAddress.setMaximumSize(new java.awt.Dimension(100, 28));
         txtAddress.setMinimumSize(new java.awt.Dimension(100, 28));
         txtAddress.setPreferredSize(new java.awt.Dimension(100, 28));
@@ -109,7 +107,7 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 211, 105));
         jLabel2.setFont(new java.awt.Font("Cantarell", 1, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 140, 66));
+        jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("Port");
         Menu.add(jLabel2);
 
@@ -118,9 +116,6 @@ public class Frame extends javax.swing.JFrame {
         jSeparator3.setPreferredSize(new java.awt.Dimension(10, 10));
         Menu.add(jSeparator3);
 
-        txtPort.setBackground(new java.awt.Color(57, 62, 70));
-        txtPort.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(78, 205, 196), 2, true));
-        txtPort.setForeground(new java.awt.Color(78, 205, 196));
         txtPort.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtPort.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPort.setText("8080");
@@ -130,7 +125,7 @@ public class Frame extends javax.swing.JFrame {
         Menu.add(txtPort);
 
         jLabel4.setFont(new java.awt.Font("Cantarell", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 140, 66));
+        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Password");
         jLabel4.setMaximumSize(new java.awt.Dimension(120, 28));
@@ -138,12 +133,8 @@ public class Frame extends javax.swing.JFrame {
         jLabel4.setPreferredSize(new java.awt.Dimension(120, 28));
         Menu.add(jLabel4);
 
-        txtPassword.setBackground(new java.awt.Color(57, 62, 70));
-        txtPassword.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(78, 205, 196));
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPassword.setText("root");
-        txtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(78, 205, 196), 2, true));
         txtPassword.setMaximumSize(new java.awt.Dimension(100, 28));
         txtPassword.setMinimumSize(new java.awt.Dimension(100, 28));
         txtPassword.setPreferredSize(new java.awt.Dimension(100, 28));
@@ -155,7 +146,7 @@ public class Frame extends javax.swing.JFrame {
         Menu.add(txtPassword);
 
         jLabel6.setFont(new java.awt.Font("Cantarell", 1, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 140, 66));
+        jLabel6.setForeground(new java.awt.Color(204, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("clients");
         jLabel6.setMaximumSize(new java.awt.Dimension(120, 28));
@@ -164,14 +155,17 @@ public class Frame extends javax.swing.JFrame {
         Menu.add(jLabel6);
 
         txtClientCount.setBackground(new java.awt.Color(57, 62, 70));
-        txtClientCount.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(78, 205, 196), 2, true));
-        txtClientCount.setForeground(new java.awt.Color(78, 205, 196));
         txtClientCount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtClientCount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtClientCount.setText("200");
         txtClientCount.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         txtClientCount.setMaximumSize(new java.awt.Dimension(60, 28));
         txtClientCount.setMinimumSize(new java.awt.Dimension(60, 28));
+        txtClientCount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClientCountActionPerformed(evt);
+            }
+        });
         Menu.add(txtClientCount);
 
         jSeparator1.setMaximumSize(new java.awt.Dimension(150, 0));
@@ -179,8 +173,7 @@ public class Frame extends javax.swing.JFrame {
         jSeparator1.setPreferredSize(new java.awt.Dimension(150, 0));
         Menu.add(jSeparator1);
 
-        btnStart.setBackground(new java.awt.Color(78, 205, 196));
-        btnStart.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        btnStart.setForeground(new java.awt.Color(204, 255, 255));
         btnStart.setText("Start");
         btnStart.setMaximumSize(new java.awt.Dimension(72, 28));
         btnStart.setMinimumSize(new java.awt.Dimension(72, 28));
@@ -205,25 +198,19 @@ public class Frame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
-                            .addComponent(ScrollPane)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(lblDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(60, 60, 60)
+                    .addComponent(lblDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lblUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -329,7 +316,7 @@ public class Frame extends javax.swing.JFrame {
                 try {
                        clinetContainer.remove(pn);
                        pn.client.sock.close();
-                } catch (Exception ex) {
+                } catch (IOException ex) {
                 
                 }    
          
@@ -365,29 +352,20 @@ public class Frame extends javax.swing.JFrame {
       
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    private void txtClientCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClientCountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClientCountActionPerformed
+
    
     public static void main(String args[]) {            
  
         System.err.close(); // this for avoid unkow graphic exception 
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-            
+      try {
 
-            
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme());
+
+        } catch (UnsupportedLookAndFeelException e) {
+            System.out.print("fail to load LookAndFeel");
         }
  
         java.awt.EventQueue.invokeLater(new Runnable() {
