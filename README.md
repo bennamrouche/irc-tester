@@ -1,8 +1,8 @@
 # 42 IRC Server Tester
 
-## 📹 Demo Video
+🎥 Demo Video  
 
-
+[Watch the demo](https://github.com/bennamrouche/irc-tester/blob/v2.1/image/video.webm)
 
 ## 🚀 Version 2.1
 
