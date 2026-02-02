@@ -34,7 +34,7 @@ public ClientPanel()
         lblLastMessage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(57, 62, 70));
-        setForeground(new java.awt.Color(255, 140, 66));
+        setForeground(new java.awt.Color(78, 205, 196));
 
         lblClientName.setBackground(new java.awt.Color(255, 255, 255));
         lblClientName.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
@@ -57,7 +57,7 @@ public ClientPanel()
             }
         });
 
-        lblLastMessage.setForeground(new java.awt.Color(255, 140, 66));
+        lblLastMessage.setForeground(new java.awt.Color(78, 205, 196));
         lblLastMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLastMessage.setText("-- -- -- --");
         lblLastMessage.setMaximumSize(new java.awt.Dimension(400, 22));

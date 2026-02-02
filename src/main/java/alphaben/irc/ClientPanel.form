@@ -6,7 +6,7 @@
       <Color blue="46" green="3e" red="39" type="rgb"/>
     </Property>
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="42" green="8c" red="ff" type="rgb"/>
+      <Color blue="c4" green="cd" red="4e" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -101,7 +101,7 @@
     <Component class="javax.swing.JLabel" name="lblLastMessage">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="42" green="8c" red="ff" type="rgb"/>
+          <Color blue="c4" green="cd" red="4e" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="-- -- -- --"/>

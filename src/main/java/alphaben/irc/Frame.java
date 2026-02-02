@@ -31,7 +31,7 @@ public class Frame extends javax.swing.JFrame {
         if (instance == null){
                 
             instance = new Frame();
-            instance.setTitle("IrcMultiClient v2 by  Alphaben");
+            instance.setTitle("IrcMultiClient v2.1 by  Alphaben");
         }
                 
         return instance; 
@@ -71,7 +71,7 @@ public class Frame extends javax.swing.JFrame {
         lblNoClient.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNoClient.setText("Irc Tester v2.1");
         clinetContainer.add(lblNoClient);
-        lblNoClient.setBounds(-48, 1, 950, 450);
+        lblNoClient.setBounds(-48, 1, 1000, 450);
 
         ScrollPane.setViewportView(clinetContainer);
 
