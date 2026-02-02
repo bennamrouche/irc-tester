@@ -8,7 +8,7 @@
 
     <groupId>alphaben.irc</groupId>
     <artifactId>irc-tester</artifactId>
-    <version>2-alpha</version>
+    <version>v2.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -24,6 +24,20 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+   <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf</artifactId>
+        <version>3.5</version>
+    </dependency>
+     
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf-intellij-themes</artifactId>
+    <version>3.5</version>
+    </dependency>
+
+
     </dependencies>
 
     <build>
@@ -39,7 +53,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Shade Plugin: create a runnable JAR -->
+      
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -52,7 +66,6 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <!-- Set the Main class -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>${exec.mainClass}</mainClass>
                                 </transformer>

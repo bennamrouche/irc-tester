@@ -66,7 +66,6 @@ public class ClientManger extends javax.swing.JFrame {
         commanmPanel.setLayout(new javax.swing.BoxLayout(commanmPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         lblName.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        lblName.setForeground(new java.awt.Color(255, 217, 61));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblName.setText("alphaben");
         commanmPanel.add(lblName);
@@ -79,13 +78,12 @@ public class ClientManger extends javax.swing.JFrame {
         jSeparator2.setPreferredSize(new java.awt.Dimension(20, 10));
         commanmPanel.add(jSeparator2);
 
-        lblStatus.setBackground(new java.awt.Color(204, 255, 102));
         lblStatus.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
         lblStatus.setForeground(new java.awt.Color(78, 205, 196));
         lblStatus.setText("Connected");
-        lblStatus.setMaximumSize(new java.awt.Dimension(69, 28));
-        lblStatus.setMinimumSize(new java.awt.Dimension(69, 28));
-        lblStatus.setPreferredSize(new java.awt.Dimension(69, 28));
+        lblStatus.setMaximumSize(new java.awt.Dimension(100, 28));
+        lblStatus.setMinimumSize(new java.awt.Dimension(0, 0));
+        lblStatus.setPreferredSize(new java.awt.Dimension(100, 28));
         commanmPanel.add(lblStatus);
 
         jSeparator6.setBackground(new Color(0,0,0,0)
@@ -121,14 +119,17 @@ public class ClientManger extends javax.swing.JFrame {
         commanmPanel.add(jSeparator11);
 
         progressBar.setValue(50);
+        progressBar.setMaximumSize(new java.awt.Dimension(200, 12));
+        progressBar.setMinimumSize(new java.awt.Dimension(200, 12));
+        progressBar.setPreferredSize(new java.awt.Dimension(200, 12));
         commanmPanel.add(progressBar);
 
-        lblMessage.setBackground(new java.awt.Color(0, 0, 0));
-        lblMessage.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        lblMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        lblMessage.setText("PING server\nJOIN #room\nTOPIC #room\nTOPIC #room :Welcome to the room\nPRIVMSG #room :hello everyone\nMODE #room +i\nMODE #room -i\nMODE #room +t\nMODE #room -t\nMODE #room +k secret\nMODE #room -k\nMODE #room +l 10\nMODE #room -l\nMODE #room +o nick\nMODE #room -o nick\nINVITE nick #room\nPRIVMSG #room :testing messages\nPART #room\nJOIN #room\nPRIVMSG #room :back again\nTOPIC #room\nMODE #room\nKICK #room nick :bye\nJOIN #another\nPRIVMSG #another :hello\nPART #another\nQUIT");
         jScrollPane2.setViewportView(lblMessage);
 
-        btnSend.setBackground(new java.awt.Color(78, 205, 196));
         btnSend.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        btnSend.setForeground(new java.awt.Color(255, 255, 255));
         btnSend.setText("Send");
         btnSend.setMaximumSize(new java.awt.Dimension(72, 28));
         btnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -137,8 +138,7 @@ public class ClientManger extends javax.swing.JFrame {
             }
         });
 
-        btnSendAll.setBackground(new java.awt.Color(78, 205, 196));
-        btnSendAll.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        btnSendAll.setForeground(new java.awt.Color(255, 255, 255));
         btnSendAll.setText("all Send this");
         btnSendAll.setMaximumSize(new java.awt.Dimension(120, 28));
         btnSendAll.setMinimumSize(new java.awt.Dimension(120, 28));
@@ -149,9 +149,8 @@ public class ClientManger extends javax.swing.JFrame {
             }
         });
 
-        btnDisconnected.setBackground(new java.awt.Color(78, 205, 196));
         btnDisconnected.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        btnDisconnected.setForeground(new java.awt.Color(51, 0, 0));
+        btnDisconnected.setForeground(new java.awt.Color(255, 0, 51));
         btnDisconnected.setText("Disconnected");
         btnDisconnected.setMaximumSize(new java.awt.Dimension(120, 28));
         btnDisconnected.setMinimumSize(new java.awt.Dimension(120, 28));
@@ -165,45 +164,43 @@ public class ClientManger extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(commanmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSendAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDisconnected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(commanmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSendAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDisconnected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(commanmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(commanmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 131, Short.MAX_VALUE)
-                        .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSendAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDisconnected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSendAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDisconnected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
