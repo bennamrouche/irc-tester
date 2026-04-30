@@ -314,25 +314,22 @@ public void updateData()
 }
 
 
-public void update()
-{
-     if (client == null)
-         return;
-     
-     lblMessage.setText("");
-     txtClientData.setText("");
+    public void update() {
+        if (client == null) return;
+        
+        lblMessage.setText("");
+        txtClientData.setText("");
+        
+        Color color = client.getStatus() == IrcClient.STATUS_CONNECTED ? Color.green : Color.red;
+        lblStatus.setForeground(color);
+        boolean enable = client.getStatus() == IrcClient.STATUS_CONNECTED;
+        setEnable(enable);
+        
+        lblStatus.setText(client.getStatusText());
+        lblName.setText(client.getClientName());
+        txtClientData.setText(client.getData());
+    }
     
-    Color color =  client.status == 0 ? Color.green : Color.red;
-   
-     lblStatus.setForeground(color);
-    boolean enable = client.status == IrcClient.STATUS_CONNECTED;
-    
-    setEnable(enable);
-   
-    lblStatus.setText(client.getStatusText());
-    lblName.setText(client.getClientName());  
-    txtClientData.setText(client.getData());
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDisconnected;

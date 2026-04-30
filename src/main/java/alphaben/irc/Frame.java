@@ -24,6 +24,13 @@ public class Frame extends javax.swing.JFrame {
             lblUpload.setText("Upload: %s".formatted(GlobalConfig.getUploadSize()));
         }); // 60 FPS
         timer.start();
+        
+        
+          Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            GlobalConfig.shutdownExecutors();
+            ClientMonitor.stop();
+        }));
+          
     }
 
     public static Frame Instance()
@@ -175,8 +182,8 @@ public class Frame extends javax.swing.JFrame {
 
         btnStart.setForeground(new java.awt.Color(204, 255, 255));
         btnStart.setText("Start");
-        btnStart.setMaximumSize(new java.awt.Dimension(72, 28));
-        btnStart.setMinimumSize(new java.awt.Dimension(72, 28));
+        btnStart.setMaximumSize(new java.awt.Dimension(100, 28));
+        btnStart.setMinimumSize(new java.awt.Dimension(100, 28));
         btnStart.setPreferredSize(new java.awt.Dimension(72, 28));
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,14 +205,18 @@ public class Frame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(lblDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(lblUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(Menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(lblDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,102 +255,90 @@ public class Frame extends javax.swing.JFrame {
           return GlobalConfig.names[index  % 200] + "_" + index;
                       
    }
-   public void runCommand()
-   {
-       
-       
-       
-        
-        if  (GlobalConfig.command == GlobalConfig.START_COMMAND)
-        {  
+  
+    public void runCommand() {
+        if (GlobalConfig.command == GlobalConfig.START_COMMAND) {
+            btnStart.setText("Stop");
             
-        
-           btnStart.setText("Stop");
-           
-           String   StringAddress       = txtAddress.getText();
-           String   StringPort          = txtPort.getText();
-           String   StringPassword      = txtPassword.getText();
-           
-           int port;
-           int clientCount;
-        
-           if(StringAddress.trim().isEmpty() || StringPort.trim().isEmpty()  || StringPassword.trim().isEmpty())
-        {
-              validationError(GlobalConfig.EMPTY_FIELDS);
-        
-                  return;
-        }
-        try{
+            String stringAddress = txtAddress.getText();
+            String stringPort = txtPort.getText();
+            String stringPassword = txtPassword.getText();
             
-              port = Integer.parseInt(StringPort);
-             clientCount =Integer.parseInt(txtClientCount.getText());
-        }catch(NumberFormatException ex){
-              validationError(GlobalConfig.BAD_PORT_CLIENT_COUNT);
-          
-              return;
-        }
-   
-        
-        if (clientCount <= 0){
-             validationError(GlobalConfig.CLIENT_NEGATIVE_ERROR);
-              return;
-        }
+            int port;
+            int clientCount;
             
-        if (port <= 0){
-           
-             validationError(GlobalConfig.BAD_PORT_CLIENT_COUNT);
-              return;
-        }
-        if(!GlobalConfig.isServerReachable(StringAddress, port, 1000)){
-            validationError(GlobalConfig.CONNECT_FAIL);
-              return;
-        }
-        
-        GlobalConfig.SERVER_PASS = StringPassword;
-        clinetContainer.removeAll();
-        clinetContainer.setLayout(new BoxLayout(clinetContainer, BoxLayout.Y_AXIS));
-
-        for(int i = 0; i<  clientCount; i++)
-        {
-            String name = generateNameFor(i);
-              
-            this.clinetContainer.add(new ClientPanel(new IrcClient(StringAddress,port, name)));
-             this.validate();
-        }
-        
-        GlobalConfig.command = 0;
-     }// end if check is runnig 
-        else if (GlobalConfig.command == GlobalConfig.STOP_COMMAND)
-        {   
-            for (ClientPanel pn : ClientPanel.clinets)
-            {
+            if (stringAddress.trim().isEmpty() || stringPort.trim().isEmpty() || stringPassword.trim().isEmpty()) {
+                validationError(GlobalConfig.EMPTY_FIELDS);
+                return;
+            }
+            
+            try {
+                port = Integer.parseInt(stringPort);
+                clientCount = Integer.parseInt(txtClientCount.getText());
+            } catch (NumberFormatException ex) {
+                validationError(GlobalConfig.BAD_PORT_CLIENT_COUNT);
+                return;
+            }
+            
+            if (clientCount <= 0) {
+                validationError(GlobalConfig.CLIENT_NEGATIVE_ERROR);
+                return;
+            }
+            
+            if (port <= 0) {
+                validationError(GlobalConfig.BAD_PORT_CLIENT_COUNT);
+                return;
+            }
+            
+            if (!GlobalConfig.isServerReachable(stringAddress, port, 1000)) {
+                validationError(GlobalConfig.CONNECT_FAIL);
+                return;
+            }
+            
+            GlobalConfig.SERVER_PASS = stringPassword;
+            clinetContainer.removeAll();
+            clinetContainer.setLayout(new BoxLayout(clinetContainer, BoxLayout.Y_AXIS));
+            
+            for (int i = 0; i < clientCount; i++) {
+                String name = generateNameFor(i);
+                IrcClient client = new IrcClient(stringAddress, port, name);
+                this.clinetContainer.add(new ClientPanel(client));
+                this.validate();
+            }
+            
+            GlobalConfig.command = 0;
+            
+        } else if (GlobalConfig.command == GlobalConfig.STOP_COMMAND) {
+            // MODIFIED: use disconnect() instead of sock.close()
+            for (ClientPanel pn : ClientPanel.clinets) {
                 try {
-                       clinetContainer.remove(pn);
-                       pn.client.sock.close();
-                } catch (IOException ex) {
-                
-                }    
-         
+                    clinetContainer.remove(pn);
+                    pn.client.disconnect();  // Changed from sock.close()
+                } catch (Exception ex) {
+                    // Ignore
+                }
             }
             
             ClientManger.getInctance().setVisible(false);
             GlobalConfig.reset();
             clinetContainer.validate();
-            ClientPanel.clinets.clear();           
-             btnStart.setText("Start");
-             clinetContainer.add(lblNoClient);
-               GlobalConfig.command = 0;
-        }
-        else
+            ClientPanel.clinets.clear();
+            btnStart.setText("Start");
+            clinetContainer.add(lblNoClient);
+            GlobalConfig.command = 0;
+        } else {
             return;
+        }
         
-           isRunning = !isRunning;
-
-          btnStart.setEnabled(true);
-           
+        isRunning = !isRunning;
+        btnStart.setEnabled(true);
         GlobalConfig.command = 0;
+    }
+    
    
-   }
+   
+   
+   
     
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
            btnStart.setEnabled(false);
@@ -357,31 +356,25 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtClientCountActionPerformed
 
    
-    public static void main(String args[]) {            
  
-        System.err.close(); // this for avoid unkow graphic exception 
-      try {
-
+         public static void main(String args[]) {
+        System.err.close();
+        
+        try {
             UIManager.setLookAndFeel(new com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme());
-
         } catch (UnsupportedLookAndFeelException e) {
             System.out.print("fail to load LookAndFeel");
         }
- 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-             Frame fr=         Frame.Instance();
+        
+        java.awt.EventQueue.invokeLater(() -> {
+            Frame fr = Frame.Instance();
             fr.setVisible(true);
             fr.setLocationRelativeTo(null);
-              GlobalConfig.Mintor.start();
-                System.err.println("run");
-                
-            }
+            ClientMonitor.start();  // Changed from GlobalConfig.Mintor.start()
+            System.err.println("run");
         });
-        
-   
-      
-    }
+    }     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;

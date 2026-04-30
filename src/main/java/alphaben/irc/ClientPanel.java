@@ -17,7 +17,7 @@ public ClientPanel()
   {
         initComponents();
         this.client = client; 
-        clinets.add(this);
+        boolean add = clinets.add(this);
         this.updateView();
      
   }
@@ -98,38 +98,33 @@ public ClientPanel()
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
-    public static String getLastLine(String text) {
+ public static String getLastLine(String text) {
         if (text == null || text.isEmpty()) return "";
-        String[] lines = text.split("\\R"); 
+        String[] lines = text.split("\\R");
+        if (lines.length == 0) return "";
         String lastLine = lines[lines.length - 1];
-        return lastLine.length() > 30 ? lastLine.substring(lastLine.length()- 30, lastLine.length()- 1)  : lastLine;
-    }
-    
-  public void updateView()
- {        
-        if (client.status == 0)
-             lblStatus.setForeground(Color.green);
-        else 
-             lblStatus.setForeground(Color.red);
-        
-    try {
-      
-        String newMesssage = client.receiveFromServer();        
-        if(newMesssage != null) {
-            this.lblLastMessage.setText(getLastLine(newMesssage));
+        if (lastLine.length() > 60) {
+            return "..." + lastLine.substring(lastLine.length() - 57);
         }
+        return lastLine;
+    }
+ 
+ 
+  public void updateView() {
+        if (client == null) return;
+        
+        if (client.getStatus() == IrcClient.STATUS_CONNECTED)
+            lblStatus.setForeground(Color.green);
+        else 
+            lblStatus.setForeground(Color.red);
         
         lblStatus.setText(client.getStatusText());
-        
-        } catch (Exception ex) 
-        {
-           client.status = IrcClient.STATUS_ERROR;
-           client.insertData("Erorr#> " + GlobalConfig.ERR_REICEVE_FROM);
-                System.err.println(ex.getMessage());
-        }
         lblClientName.setText(client.getClientName());
-                
-    }
+        
+        String lastMsg = getLastLine(client.getData());
+        lblLastMessage.setText(lastMsg.isEmpty() ? "-- -- -- --" : lastMsg);
+    
+  }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
