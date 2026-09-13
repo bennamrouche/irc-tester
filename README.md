@@ -1,5 +1,9 @@
 # 42 IRC Server Tester
 
+> [!WARNING]
+> **Repository Archived on 2026-09-13**
+> This repository is no longer actively maintained. The common core curriculum has changed, and IRC is no longer a part of it. However, I am always open to collaborating on new open-source projects or features—feel free to reach out to me!
+
 🎥 Demo Video  
 
 [Watch the demo](https://github.com/bennamrouche/irc-tester/blob/v2.1/image/video.webm)
@@ -95,6 +99,7 @@ Check the **Main Window** to see:
 ---
 
 ## 🤝 Connect with Me
+Maintained by El Mehdi Bennamrouche (aka Alphaben). Feel free to reach out if you want to collaborate, pitch features, or build new open-source project
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/el-mehdi-bennamrouche)
 [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://fb.com/alphaben.dev)
